@@ -23,9 +23,8 @@ class Item(BaseModel):
 
 
 def key_value_streamer():
-    for key in range(10):
+    for key in redis_client.scan_iter():
         yield key
-        time.sleep(1)
 
 
 @app.post('/create')
