@@ -4,6 +4,7 @@ from pydantic import BaseModel
 import redis
 import os
 import time
+import logging
 
 app = FastAPI()
 
@@ -22,8 +23,9 @@ class Item(BaseModel):
 
 
 def key_value_streamer():
-    for key in redis_client.scan_iter():
+    for key in range(10):
         yield key
+        time.sleep(1)
 
 
 @app.post('/create')
