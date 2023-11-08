@@ -9,6 +9,7 @@ services:
   webserver:
     image: webserver
     build: ./webserver
+    command: "uvicorn main:app --host 0.0.0.0 --port 80"
     ports:
       - "80:80"
     networks:
