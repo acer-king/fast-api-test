@@ -24,12 +24,12 @@ class Item(BaseModel):
 
 def key_value_streamer():
     for key in redis_client.scan_iter():
-        yield key
+        yield str(key)
 
 
 @app.post('/create')
 async def create_key_value(item: Item):
-    redis_client.hset(hash_name, item.key, item.value)
+    redis_client.set(item.key, item.value)
     return item
 
 
